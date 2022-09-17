@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import Cocktail from '../models/Cocktail.model';
 import Card from './Card';
+import i18n from '../utils/localization';
+import { useStateContext } from '../contexts/ContextProvider';
 
 interface IProps {
   searchName: string,
@@ -10,10 +12,16 @@ interface IProps {
 }
 
 const NoResult = ({ searchName, cocktails, handleCocktailClick }: IProps) => {
+
+  const { lang } = useStateContext();
+  i18n.locale = lang;
+
   return (
-    <ScrollView>
-      <Text className='text-white text-2xl'>Nessun risultato per: {searchName}</Text>
-      <View className='flex  w-full gap-8 p-10 align-middle xl:justify-between'>
+    <ScrollView >
+      <Text className='w-full text-2xl text-center text-white'>
+        {i18n.t('no-result')} {searchName}
+      </Text>
+      <View className='flex items-center justify-center w-full p-3'>
         {
           cocktails
             .map(cocktail => ({ cocktail, sort: Math.random() }))

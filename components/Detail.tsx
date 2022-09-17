@@ -2,7 +2,8 @@ import React from 'react';
 import Cocktail from '../models/Cocktail.model';
 import { formatLocale } from '../utils';
 import { View, Text, Image, Button, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import i18n from '../utils/localization';
+import { useStateContext } from '../contexts/ContextProvider';
 
 interface IProps {
   cocktail: Cocktail
@@ -11,9 +12,8 @@ interface IProps {
 const Detail = ({ cocktail }: IProps) => {
   const MAX_STR_LIMIT = 15;
 
-  // const { locale }: { locale?: string } = useRouter();
-  const locale = 'it';
-  const formattedLocale = formatLocale(locale!);
+  const { lang } = useStateContext();
+  i18n.locale = lang;
 
   return (
     <View className='flex flex-row justify-start w-full '>
@@ -26,7 +26,7 @@ const Detail = ({ cocktail }: IProps) => {
 
       <View className='w-full pl-5'>
         <Text className='pb-3 text-2xl font-semibold text-white'>{cocktail.strDrink}</Text>
-        <Text className='mb-4 text-white'> Ingredienti </Text>
+        <Text className='mb-4 text-white'> {i18n.t('ingredienti')} </Text>
         <View>
           {[...Array(MAX_STR_LIMIT)].filter((item, index) => cocktail[`strIngredient${index + 1}` as keyof typeof cocktail]).map((item, index) => (
             <Text key={index} className='text-white'>
@@ -35,7 +35,7 @@ const Detail = ({ cocktail }: IProps) => {
           ))}
         </View>
         <ScrollView className='mt-4 text-white w-60 max-h-40'>
-          <Text className='text-white'>{formattedLocale === 'it' ? cocktail?.strInstructionsIT : cocktail?.strInstructions}</Text>
+          <Text className='text-white'>{lang === 'it' ? cocktail?.strInstructionsIT : cocktail?.strInstructions}</Text>
         </ScrollView>
 
       </View>

@@ -45,8 +45,8 @@ const HomeScreen = ({ navigation }) => {
   }, [])
 
   return (
-    <View className='flex justify-between w-full h-full p-4 bg-black ios:pt-10'>
-      <Header handleSearch={handleSearch} />
+    <View className='flex justify-between w-full h-full p-3 bg-black'>
+      <Header handleSearch={handleSearch} handleLogoClick={handleNewCocktail} />
       <View className={`w-full pt-4 ${cocktails?.length === 1 ? 'h-[50%]' : 'h-[70%]'}`}>
         {
           cocktails?.length === 1 && cocktails[0] !== null ? (

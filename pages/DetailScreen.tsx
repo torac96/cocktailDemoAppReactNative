@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import Detail from '../components/Detail';
+import Footer from '../components/Footer';
 import { COCKTAIL_API_URL_LOOKUP } from '../utils';
 
 const DetailScreen = ({ route, navigation }) => {
@@ -15,8 +16,13 @@ const DetailScreen = ({ route, navigation }) => {
   }, [])
 
   return (
-    <View className='items-center justify-center flex-1 bg-black'>
-      {cocktail && <Detail cocktail={cocktail} />}
+    <View className='items-center justify-between flex-1 bg-black'>
+      <View className='w-full mt-20'>
+        {cocktail && <Detail cocktail={cocktail} />}
+      </View>
+      <View className='mb-3'>
+        <Footer />
+      </View>
     </View>
   )
 }

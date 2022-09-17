@@ -1,36 +1,44 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TextInput, ImageBackground, Button } from 'react-native';
+import { View, Text, Image, TextInput, ImageBackground, Button, TouchableOpacity } from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
+import i18n from '../utils/localization';
+import { useStateContext } from '../contexts/ContextProvider';
 
 interface IProps {
   handleSearch: (params: any) => any,
-  handleChangeLang?: (params: any) => any,
-  handleLogoClick?: () => any,
+  handleLogoClick: () => any,
 }
 
-const Header = ({ handleSearch, handleChangeLang, handleLogoClick }: IProps) => {
+const Header = ({ handleSearch, handleLogoClick }: IProps) => {
+  const { lang, setLang } = useStateContext();
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+  i18n.locale = lang;
+  const toggleSwitch = () => {
+    setIsEnabled(previousState => !previousState);
+    setLang(isEnabled ? 'it' : 'en');
+  }
 
   const [name, setName] = useState('');
   const handleChange = (event: any) => {
     setName(event);
   }
 
-
   return (
     <View>
       <View className="flex-row items-center justify-between w-full">
+      <TouchableOpacity onPress={() => handleLogoClick()}>
         <Image
           source={require('../assets/cocktail-bar.webp')}
           style={{ width: 156, height: 132 }}
         />
+        </TouchableOpacity>
         <View className="flex-row items-center justify-center pr-5" onTouchStart={toggleSwitch}>
           <Text className="pr-3 text-sm font-medium text-gray-300">IT</Text>
 
           <View className="relative inline-flex items-center cursor-pointer">
             <View className=" relative w-11 h-6 rounded-full border bg-gray-700 border-[#83F3FB]   ">
-              <View className="bg-white absolute w-5 h-5 rounded-full ${isEnabled ? 'left-[2px]' : 'right-[2px]'}  ">
+              <View className={`bg-white absolute w-5 h-5 rounded-full ${isEnabled ? 'right-[2px]' : 'left-[2px]'}  `}>
                   <ImageBackground source={isEnabled ? require('../assets/usFlag.png') : require('../assets/itFlag.png')} resizeMode="cover"  className="flex justify-center w-5 h-5 rounded-full"></ImageBackground>
               </View>
             </View>
@@ -50,17 +58,16 @@ const Header = ({ handleSearch, handleChangeLang, handleLogoClick }: IProps) => 
             className="block p-4 w-2/3 text-sm  bg-black text-[#83F3FB]  focus-visible:border-none focus-visible:outline-none"
             onChangeText={handleChange}
             value={name}
-            placeholder="Search..."
+            placeholder={i18n.t('search')}
             placeholderTextColor={'#83F3FB'}
           />
 
           <View className=" bg-[#F67DF7] px-3y py-1 rounded-xl">
             <Button
               onPress={() => handleSearch(name)}
-              title="Search"
+              title={i18n.t('search')}
               color="white"
-              accessibilityLabel="Search"
-              
+              accessibilityLabel={i18n.t('search')}
             />
           </View>
           
