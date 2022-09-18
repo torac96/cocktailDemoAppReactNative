@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import Detail from '../components/Detail';
 import Footer from '../components/Footer';
 import { COCKTAIL_API_URL_LOOKUP } from '../utils';
@@ -16,14 +16,14 @@ const DetailScreen = ({ route, navigation }) => {
   }, [])
 
   return (
-    <View className='items-center justify-between flex-1 bg-black'>
+    <SafeAreaView className='items-center justify-between flex-1 p-5 bg-black'>
       <View className='w-full mt-20'>
         {cocktail && <Detail cocktail={cocktail} />}
       </View>
       <View className='mb-3'>
         <Footer />
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 

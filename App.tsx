@@ -20,6 +20,7 @@ const App = () => {
 
           <Stack.Screen name="Home" component={HomeScreen}
             options={{
+              headerShown: false,
               headerStyle,
               headerTintColor,
             }}

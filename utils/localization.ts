@@ -4,21 +4,17 @@ import { I18n } from 'i18n-js';
 // Set the key-value pairs for the different languages you want to support.
 const translations = {
   en: {
-    "page.home.head.title": "Cocktail bar is open",
-    "page.home.head.meta.description": "Do you want to know how to make a cocktail? visit my site and have a look",
     "ingredienti": "Ingredient",
     "search": "Search",
-    "page.home.cocktail.new": "New random cocktail",
     "no-result": "No result for: ",
+    "result": "Results found for: ",
     "footer": "Powered by "
   },
   it: {
-    "page.home.head.title": "Cocktail bar è aperto",
-    "page.home.head.meta.description": "Vuoi sapere come si fa un cocktail? visita il mio sito e dai un'occhiata",
     "ingredienti": "Ingredienti",
     "search": "Ricerca",
-    "page.home.cocktail.new": "Nuovo cocktail random",
     "no-result": "Nessun risultato per: ",
+    "result": "Risultati trovati per: ",
     "footer": "Sviluppato da "
   },
 };

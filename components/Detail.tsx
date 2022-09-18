@@ -18,24 +18,22 @@ const Detail = ({ cocktail }: IProps) => {
   return (
     <View className='flex flex-row justify-start w-full '>
 
-      <View className="rounded-full border-4 h-32 border-[#83F3FB]">
-        <Image className='rounded-full ' source={{
-          uri: cocktail?.strDrinkThumb
-        }} style={{ width: 120, height: 120 }} />
+      <View className="rounded-full border-4 h-28 border-[#83F3FB] android:border-slate-900 ">
+        <Image className='rounded-full' style={{ width: 104, height: 104 }} source={{ uri: cocktail?.strDrinkThumb}}  />
       </View>
 
-      <View className='w-full pl-5'>
+      <View className='w-full h-full pl-5'>
         <Text className='pb-3 text-2xl font-semibold text-white'>{cocktail.strDrink}</Text>
         <Text className='mb-4 text-white'> {i18n.t('ingredienti')} </Text>
-        <View>
-          {[...Array(MAX_STR_LIMIT)].filter((item, index) => cocktail[`strIngredient${index + 1}` as keyof typeof cocktail]).map((item, index) => (
-            <Text key={index} className='text-white'>
-              - {`${cocktail[`strMeasure${index + 1}` as keyof typeof cocktail] ?? ''} ${cocktail[`strIngredient${index + 1}` as keyof typeof cocktail]}`}
-            </Text>
-          ))}
-        </View>
-        <ScrollView className='mt-4 text-white w-60 max-h-40'>
-          <Text className='text-white'>{lang === 'it' ? cocktail?.strInstructionsIT : cocktail?.strInstructions}</Text>
+        <ScrollView className='h-[30vh]'>
+          <View>
+            {[...Array(MAX_STR_LIMIT)].filter((item, index) => cocktail[`strIngredient${index + 1}` as keyof typeof cocktail]).map((item, index) => (
+              <Text key={index} className='text-white'>
+                - {`${cocktail[`strMeasure${index + 1}` as keyof typeof cocktail] ?? ''} ${cocktail[`strIngredient${index + 1}` as keyof typeof cocktail]}`}
+              </Text>
+            ))}
+          </View>
+          <Text className='mt-4 text-white w-[55vw]'>{lang === 'it' ? cocktail?.strInstructionsIT : cocktail?.strInstructions}</Text>
         </ScrollView>
 
       </View>

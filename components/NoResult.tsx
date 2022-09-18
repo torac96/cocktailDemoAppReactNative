@@ -8,18 +8,18 @@ import { useStateContext } from '../contexts/ContextProvider';
 interface IProps {
   searchName: string,
   cocktails: Cocktail[],
-  handleCocktailClick: (cocktail: Cocktail) => void
+  handleCocktailClick: (cocktail: Cocktail) => void,
+  foundCocktails?: boolean
 }
 
-const NoResult = ({ searchName, cocktails, handleCocktailClick }: IProps) => {
-
+const NoResult = ({ searchName, cocktails, handleCocktailClick, foundCocktails}: IProps) => {
   const { lang } = useStateContext();
   i18n.locale = lang;
 
   return (
     <ScrollView >
       <Text className='w-full text-2xl text-center text-white'>
-        {i18n.t('no-result')} {searchName}
+        {i18n.t(foundCocktails ? 'result' : 'no-result')} {searchName}
       </Text>
       <View className='flex items-center justify-center w-full p-3'>
         {
